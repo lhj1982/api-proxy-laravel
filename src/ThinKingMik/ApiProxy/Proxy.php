@@ -106,6 +106,8 @@ class Proxy {
         if (isset($grantType)) {
             if ($grantType === ProxyAux::PASSWORD_GRANT) {
                 $mode = ProxyAux::MODE_LOGIN;
+            } else if ($grantType === ProxyAux::GUEST_GRANT) { // add new grant type
+                $mode = ProxyAux::MODE_LOGIN;
             }
         }
         else if (isset($skip) && strtolower($skip) === 'true') {

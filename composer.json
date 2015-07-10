@@ -1,6 +1,6 @@
 {
-    "name": "thinkingmik/api-proxy-laravel",
-    "description": "A Laravel proxy package for javascript API calls",
+    "name": "ademes/api-proxy-laravel",
+    "description": "A Laravel proxy package for javascript API calls, based on thinkingmik/api-proxy-laravel",
     "keywords": [
         "laravel",
         "API",
@@ -13,6 +13,10 @@
         {
             "name": "Michele Andreoli",
             "email": "michi.andreoli@gmail.com"
+        },
+        {
+            "name": "Huajun Li",
+            "email": "lhj1982@gmail.com"      
         }
     ],
     "require": {

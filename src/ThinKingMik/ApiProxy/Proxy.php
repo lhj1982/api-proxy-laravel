@@ -26,6 +26,7 @@ class Proxy {
     private $clientSecrets = null;
     private $cookieManager = null;
     private $useHeader = false;
+    private $allowedErrors = [];
 
     /**
      * @param $params
@@ -37,6 +38,7 @@ class Proxy {
         $this->clientSecrets = $params['client_secrets'];
         $this->useHeader = $params['use_header'];
         $this->cookieManager = new CookieManager($params['cookie_info']);
+        $this->allowedErrors = $params['allowed_errors'];
     }
 
     /**
@@ -121,7 +123,7 @@ class Proxy {
     private function setApiResponse($proxyResponse, $cookie) {
         $response = new Response($proxyResponse->getContent(), $proxyResponse->getStatusCode());
 
-        if ($proxyResponse->getStatusCode() === 200) {
+        if ($proxyResponse->getStatusCode() === 200 || in_array($proxyResponse->getStatusCode(), $this->allowedErrors)) {
             if ($this->callMode === ProxyAux::MODE_LOGIN) {
                 $response->setContent(json_encode($this->successAccessToken()));
             }

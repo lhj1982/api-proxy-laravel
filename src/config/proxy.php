@@ -80,4 +80,11 @@ return [
         'client_1' => 'abc123',
         'client_2' => 'def456'
     ],
+
+    /*
+     * List of http error codes which are allowed to keep Cookies in response.
+     */
+    'allowed_errors' => [
+      '400','401','403','500'
+    ]
 ];

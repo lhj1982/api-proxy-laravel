@@ -83,8 +83,13 @@ return [
 
     /*
      * List of http error codes which are allowed to keep Cookies in response.
+     * errorCodes defines list of http errors that could return cookies
+     * except defines list of errors that should be exceptional, i.e. should not be treated as pass proxy
      */
     'allowed_errors' => [
-      '400','401','403','500'
+        'errorCodes' =>[
+            '400','401','403','500'
+        ],
+        'except' => ['100005','100001']
     ]
 ];

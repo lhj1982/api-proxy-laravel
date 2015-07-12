@@ -124,8 +124,11 @@ class Proxy {
      */
     private function setApiResponse($proxyResponse, $cookie) {
         $response = new Response($proxyResponse->getContent(), $proxyResponse->getStatusCode());
-
-        if ($proxyResponse->getStatusCode() === 200 || in_array($proxyResponse->getStatusCode(), $this->allowedErrors)) {
+        if ($proxyResponse->getStatusCode() === 200 || in_array($proxyResponse->getStatusCode(), $this->allowedErrors['errorCodes'])) {
+            $content = $proxyResponse->getContent();
+            if (array_key_exists('error', $content) && in_array($content['error'], $this->allowedErrors['except'])) {
+                return $response;
+            }
             if ($this->callMode === ProxyAux::MODE_LOGIN) {
                 $response->setContent(json_encode($this->successAccessToken()));
             }

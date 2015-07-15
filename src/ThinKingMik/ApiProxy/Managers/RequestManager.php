@@ -95,7 +95,8 @@ class RequestManager {
         $cookie = null;
         $mixed = new MixResponse($proxyResponse, $cookie);
 
-        if ($proxyResponse->getStatusCode() != 200) {
+        $config = \Config::get('api-proxy-laravel::proxy');
+        if ($proxyResponse->getStatusCode() != 200 && in_array($proxyResponse->getStatusCode(), $config['allowed_errors']['error_can_refresh_token'])) {
             if (array_key_exists(ProxyAux::REFRESH_TOKEN, $parsedCookie)) {
                 $mixed = $this->tryRefreshToken($inputs, $parsedCookie);
             }

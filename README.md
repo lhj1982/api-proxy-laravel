@@ -191,7 +191,7 @@ Add the following line to the `require` section of `composer.json`:
 In order to use the Api Proxy publish its configuration first
 
 ```
-php artisan config:publish thinkingmik/api-proxy-laravel
+php artisan config:publish ademes/api-proxy-laravel
 ```
 
 Afterwards edit the file ```app/config/packages/thinkingmik/api-proxy-laravel/proxy.php``` to suit your needs.

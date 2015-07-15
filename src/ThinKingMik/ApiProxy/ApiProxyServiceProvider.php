@@ -29,7 +29,7 @@ class ApiProxyServiceProvider extends ServiceProvider {
      * @return void
      */
     public function boot() {
-        $this->package('thinkingmik/api-proxy-laravel');
+        $this->package('ademes/api-proxy-laravel');
     }
 
     /**

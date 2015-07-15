@@ -54,7 +54,7 @@ return [
      */
     'cookie_info' => [
         'name' => 'proxify',
-        'time' => 1
+        'time' => NULL
     ],
 
     /*
@@ -90,6 +90,7 @@ return [
         'errorCodes' =>[
             '400','401','403','500'
         ],
-        'except' => ['100005','100001']
+        'except' => ['100005','100001'],
+        'error_can_refresh_token' => ['401', '403']
     ]
 ];

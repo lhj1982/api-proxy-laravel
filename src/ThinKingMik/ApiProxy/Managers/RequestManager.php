@@ -194,8 +194,12 @@ class RequestManager {
         }
         else {
             $options = array_add($options, 'body', $inputs);
+            
+            if (array_key_exists('method', $options['body'])) {
+                $options['body']['_method'] = $options['body']['method'];
+                unset($options['body']['method']);
+            }
         }
-
         $request = $client->createRequest($method, $uriVal, $options);
         $this->updateFormData($request, $inputs);
         try {

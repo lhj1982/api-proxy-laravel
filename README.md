@@ -8,3 +8,5 @@ PHP Api Proxy for Laravel 4, forked from original api proxy laravel package, doc
 ## Config that pass on session even if some http errors.
 
 ## Support image upload via guzzlehttp, right now, only support single file and user has to send in it with parameter key 'file'
+
+## When PUT request, in client, we need to send post request with 'method'=>'PUT', and proxy itself will convert it to _method on runtime

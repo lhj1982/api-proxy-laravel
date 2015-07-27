@@ -15,6 +15,7 @@ use ThinKingMik\ApiProxy\Models\ProxyResponse;
 use ThinKingMik\ApiProxy\Models\MixResponse;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\ClientException;
+use GuzzleHttp\Message\Request;
 use ThinKingMik\ApiProxy\Exceptions\MissingClientSecretException;
 
 class RequestManager {
@@ -196,7 +197,7 @@ class RequestManager {
         }
 
         $request = $client->createRequest($method, $uriVal, $options);
-
+        $this->updateFormData($request, $inputs);
         try {
             $response = $client->send($request);
         }
@@ -205,6 +206,16 @@ class RequestManager {
         }
 
         return $response;
+    }
+
+    private function updateFormData(Request &$request, Array $inputs) {
+        if (array_key_exists('file', $inputs) && is_a($inputs['file'], 'Symfony\Component\HttpFoundation\File\UploadedFile')) {
+            $postBody = $request->getBody();
+            $photo = \Input::file('file');
+            $filename = $photo->getClientOriginalName();
+            $photo->move(storage_path(), $filename);
+            $postBody->addFile(new \GuzzleHttp\Post\PostFile('file', fopen(storage_path() . '/' . $filename, 'r')));
+        }
     }
 
     /**
